@@ -23,3 +23,27 @@ export const addMovieToWatchList = async (movieId: number) => {
   console.log(json);
   return json;
 };
+
+//!! fetching watch list movies
+export const fetchWatchListMovies = async () => {
+  const url =
+    'https://api.themoviedb.org/3/account/9895577/watchlist/movies?language=en-US&page=1&sort_by=created_at.asc';
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YmMxMzUxYmNjOWQyZDA3NDA5YjIyOTliOTg5ODM5NiIsIm5iZiI6MTcxOTc1OTczMS44NTEzMzQsInN1YiI6IjVmY2ViMWYyNTkwMDg2MDAzZGZjMDhkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._FIbSb4U__MQQCQFj2K21CXkYmLkFBvaRqhokUcdWTQ',
+    },
+  };
+
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch top rated movies');
+  }
+
+  const json = await response.json();
+
+  return json.results;
+};
