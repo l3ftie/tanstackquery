@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   getStartedContainer: {
-    alignItems: 'center',
+    /*  */ alignItems: 'center',
     marginHorizontal: 50,
   },
   getStartedText: {
