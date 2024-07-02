@@ -6,9 +6,9 @@ import MovieListItems from '~/components/MovieListItems';
 export default function Home() {
   const { data, isLoading, error, fetchNextPage } = useInfiniteQuery({
     queryKey: ['movies'],
-    queryFn: ({ pageParam }) => fetchTopRatedMovies(pageParam),
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => 2,
+    queryFn: ({ pageParam }) => fetchTopRatedMovies(pageParam),
+    getNextPageParam: (lastPage, pages) => pages.length + 1,
   });
 
   if (isLoading) {
@@ -18,7 +18,7 @@ export default function Home() {
     return <Text>{error.message}</Text>;
   }
 
-  const movies = data?.pages.flat();
+  const movies = data?.pages?.flat();
 
   return (
     <View style={styles.container}>
@@ -29,7 +29,7 @@ export default function Home() {
         columnWrapperStyle={{ gap: 5 }} /*  */
         renderItem={({ item }) => <MovieListItems movie={item} />}
         onEndReached={() => {
-          console.log('end reached');
+          fetchNextPage();
         }}
       />
     </View>
