@@ -26,7 +26,7 @@ export default function Home() {
         data={movies}
         numColumns={2}
         contentContainerStyle={{ gap: 5, padding: 5 }}
-        columnWrapperStyle={{ gap: 5 }}
+        columnWrapperStyle={{ gap: 5 }} /*  */
         renderItem={({ item }) => <MovieListItems movie={item} />}
         onEndReached={() => {
           console.log('end reached');
